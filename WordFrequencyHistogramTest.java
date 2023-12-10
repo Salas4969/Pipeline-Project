@@ -1,58 +1,54 @@
 import org.junit.jupiter.api.Test;
-import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WordFrequencyHistogramTest {
 
     @Test
-    public void testReadTextFromFile() {
-        // Arrange
-        String filePath = "aawiki-20231001-pages-logging.xml.gz";
+    void testParseXML() {
+        // You can create a test XML file for testing
+        String filePath = "WikidataTitles.xml";
 
-        // Act
-        String text = WordFrequencyHistogram.readTextFromFile(filePath);
+        // Create an instance of WordFrequencyHistogram
+        WordFrequencyHistogram wordFrequencyHistogram = new WordFrequencyHistogram();
 
-        // Assert
-        assertNotNull(text);
-        // You may add more specific assertions based on your test data
+        // Call the parseXML method and assert the result
+        assertNotNull(wordFrequencyHistogram.parseXML(filePath));
     }
 
     @Test
-    public void testCountWordFrequency() {
-        // Arrange
-        String sampleText = "This is a sample text. Text is a sample.";
+    void testExtractLogTitles() {
+        // You can create a test Document for testing
+        Document testDocument = createTestDocument();
 
-        // Act
-        Map<String, Integer> wordFrequency = WordFrequencyHistogram.countWordFrequency(sampleText);
+        // Create an instance of WordFrequencyHistogram
+        WordFrequencyHistogram wordFrequencyHistogram = new WordFrequencyHistogram();
 
-        // Assert
-        assertNotNull(wordFrequency);
-        assertEquals(2, wordFrequency.get("text"));
-        assertEquals(2, wordFrequency.get("sample"));
-        // ... add more assertions as needed
+        // Call the extractLogTitles method and assert the result
+        assertNotNull(wordFrequencyHistogram.extractLogTitles(testDocument));
     }
 
-    // Add more tests as needed
-
     @Test
-    public void testDrawHistogram() {
-        // Arrange
-        Map<String, Integer> wordFrequency = new HashMap<>();
-        wordFrequency.put("apple", 3);
-        wordFrequency.put("banana", 5);
+    void testFitToPowerLaw() {
+        // You can create a test logTitleFrequency Map for testing
+        Map<String, Integer> testLogTitleFrequency = createTestLogTitleFrequency();
 
-        // Act (Assuming drawHistogram outputs to console)
-        // Uncomment the line below if you want to capture the console output for testing
-        // ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        // System.setOut(new PrintStream(outContent));
+        // Create an instance of WordFrequencyHistogram
+        WordFrequencyHistogram wordFrequencyHistogram = new WordFrequencyHistogram();
 
-        WordFrequencyHistogram.drawHistogram(wordFrequency);
+        // Call the fitToPowerLaw method and assert the result
+        assertDoesNotThrow(() -> wordFrequencyHistogram.fitToPowerLaw(testLogTitleFrequency));
+    }
 
-        // Uncomment the lines below if you want to check the console output
-        // String expectedOutput = "Expected output based on your data";
-        // assertEquals(expectedOutput, outContent.toString().trim());
+    // Create helper methods to generate test data
+    private Document createTestDocument() {
+        // Implement this method to create a test Document for testing
+        // You can use a library like TestNG or create a simple mock object
+        return null;
+    }
 
-        // Reset console output stream
-        // System.setOut(System.out);
+    private Map<String, Integer> createTestLogTitleFrequency() {
+        // Implement this method to create a test logTitleFrequency Map for testing
+        // You can use sample data or create a mock object
+        return null;
     }
 }
