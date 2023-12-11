@@ -6,7 +6,7 @@ public class WordFrequencyHistogramTest {
     @Test
     void testParseXML() {
         // You can create a test XML file for testing
-        String filePath = "WikidataTitles.xml";
+        String filePath = "\\src\\main\\java\\WikidataTitles.xml";
 
         // Create an instance of WordFrequencyHistogram
         WordFrequencyHistogram wordFrequencyHistogram = new WordFrequencyHistogram();
